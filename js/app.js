@@ -14,18 +14,16 @@ else{
 }
   }
 
-
 let addtask = ()=>{
   let  taskdata = taskinput.value
-  if(taskdata. trim() == ""   ){
+  if(taskdata. trim() == ""){
    alert("you must enter valied data")
   }else{
     
-      notasks.classList.add('none')
+      notasks.innerHTML = '<style>display:none; background-color:none;</style>';
       alltasks.innerHTML +=`
       <div class="alert alert-info">  ${taskdata}  <i class=" float-right delete    fas fa-trash-alt" style="font-size: 20px;"></i> </div>`
       taskinput.value= "";
-
   }
 }
 
@@ -36,7 +34,12 @@ let addtask = ()=>{
  document.addEventListener('click' , (e)=>{
 if(e.target.classList.contains('delete')){
   e.target.parentElement.remove();
-  notasksShow();
+  if(alltasks.childElementCount == 0){
+    notasksShow();
+    notasks.innerHTML = `<div class="alert alert-danger">
+                          <h5>No data added yet</h5>
+                        </div>`;
+  }
 }
 
  })
